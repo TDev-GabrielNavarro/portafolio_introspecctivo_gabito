@@ -1,20 +1,25 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Análisis de Identidad y Desarrollo
 
-# Run and deploy your AI Studio app
+Un proyecto interactivo e introspectivo que explora el desarrollo personal, la autonomía en el aprendizaje y la resiliencia familiar. Este portafolio web fue creado como una narrativa dinámica para reflexionar sobre momentos críticos que forjaron mi identidad profesional y personal.
 
-This contains everything you need to run your app locally.
+**Autor:** Gabriel Navarro ([@TDev-GabrielNavarro](https://github.com/TDev-GabrielNavarro))
 
-View your app in AI Studio: https://ai.studio/apps/252a6407-6513-466c-89e8-c54545831330
+## Tecnologías Utilizadas
+- React + Vite
+- TypeScript
+- Tailwind CSS
+- Framer Motion (para animaciones)
 
-## Run Locally
+## Ejecutar Localmente
 
-**Prerequisites:**  Node.js
+**Requisitos:** Node.js
 
-
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1. Instala las dependencias:
+   ```bash
+   npm install
+   ```
+2. Ejecuta el servidor de desarrollo:
+   ```bash
+   npm run dev
+   ```
+3. Abre [http://localhost:5173](http://localhost:5173) en tu navegador para ver el proyecto.

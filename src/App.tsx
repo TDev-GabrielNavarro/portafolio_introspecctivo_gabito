@@ -269,7 +269,7 @@ const Section = ({
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => onExplore(id)}
-                className="flex items-center gap-3 bg-primary text-secondary px-6 py-3 rounded-xl font-bold uppercase tracking-[0.2em] text-[11px] group transition-all hover:bg-neutral-800 hover:text-primary shadow-lg hover:shadow-accent/10 w-fit"
+                className="flex items-center gap-3 bg-primary text-secondary px-6 py-3 rounded-xl font-bold uppercase tracking-[0.2em] text-[11px] group transition-all hover:bg-neutral-800 shadow-lg hover:shadow-accent/10 w-fit"
               >
                 Explorar narrativa <ArrowRight size={18} className="transition-transform group-hover:translate-x-2 text-accent" />
               </motion.button>
@@ -411,7 +411,7 @@ export default function App() {
           >
             <a 
               href="#autonomy"
-              className="px-12 py-5 bg-primary text-secondary rounded-2xl font-bold transition-all hover:bg-neutral-800 hover:text-primary hover:scale-105 active:scale-95 shadow-xl hover:shadow-accent/20"
+              className="px-12 py-5 bg-primary text-secondary rounded-2xl font-bold transition-all hover:bg-neutral-800 hover:scale-105 active:scale-95 shadow-xl hover:shadow-accent/20"
             >
               Comenzar lectura
             </a>
@@ -469,7 +469,7 @@ export default function App() {
                whileHover={{ scale: 1.02 }}
                whileTap={{ scale: 0.98 }}
                onClick={() => setExpandedSection('conclusion')}
-               className="flex items-center gap-3 bg-primary text-secondary px-6 py-3 rounded-xl font-bold uppercase tracking-[0.2em] text-[11px] group transition-all hover:bg-neutral-800 hover:text-primary shadow-lg hover:shadow-accent/10 w-fit"
+               className="flex items-center gap-3 bg-primary text-secondary px-6 py-3 rounded-xl font-bold uppercase tracking-[0.2em] text-[11px] group transition-all hover:bg-neutral-800 shadow-lg hover:shadow-accent/10 w-fit"
              >
                Leer Conclusión <ArrowRight size={18} className="transition-transform group-hover:translate-x-2 text-accent" />
              </motion.button>
