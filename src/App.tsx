@@ -20,6 +20,11 @@ import {
   X
 } from 'lucide-react';
 
+// Importando las imágenes de la carpeta assets
+import imgAutonomia from '@/assets/img/01.jpg';
+import imgResiliencia from '@/assets/img/02.jpg';
+import imgAutoconciencia from '@/assets/img/03.jpg';
+
 // --- Data ---
 
 const NARRATIVE_DATA = {
@@ -79,16 +84,16 @@ const Navbar = ({ activeSection, isDark, toggleTheme }: {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 px-6 md:px-12 py-8 flex justify-between items-center backdrop-blur-md bg-bg/80 border-b border-border shadow-sm">
+    <nav className="fixed top-0 left-0 w-full z-50 px-6 md:px-10 lg:px-20 xl:px-32 py-4 md:py-5 flex flex-wrap justify-between items-center backdrop-blur-md bg-bg/80 border-b border-border shadow-sm gap-y-4">
       <motion.div 
         initial={{ opacity: 0, x: -20 }}
         animate={{ opacity: 1, x: 0 }}
-        className="font-sans font-bold text-sm tracking-[0.2em] uppercase"
+        className="font-sans font-bold text-xs md:text-[13px] tracking-[0.2em] uppercase shrink-0"
       >
-        GABRIEL NAVARRO<span className="font-light text-muted"> | JUNIOR DEVELOPER</span>
+        GABRIEL NAVARRO<span className="hidden lg:inline font-light text-muted"> | JUNIOR DEVELOPER</span>
       </motion.div>
       
-      <div className="hidden md:flex gap-12 items-center">
+      <div className="hidden md:flex gap-4 lg:gap-8 items-center flex-wrap">
         {navItems.map((item) => (
           <a
             key={item.id}
@@ -128,7 +133,7 @@ const ExpandedNarrative = ({ isOpen, content, onClose }: { isOpen: boolean; cont
             initial={{ scale: 0.9, opacity: 0, y: 50 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
             exit={{ scale: 0.9, opacity: 0, y: 50 }}
-            className="w-full max-w-3xl max-h-[85vh] overflow-y-auto bg-bg border border-border rounded-3xl p-10 md:p-16 shadow-2xl relative"
+            className="w-full max-w-3xl max-h-[85vh] overflow-y-auto card-responsive relative"
             onClick={(e) => e.stopPropagation()}
           >
             <button 
@@ -138,14 +143,14 @@ const ExpandedNarrative = ({ isOpen, content, onClose }: { isOpen: boolean; cont
               <X size={20} />
             </button>
             
-            <span className="text-accent-warm font-bold uppercase tracking-[0.2em] text-[10px] mb-6 block">Texto Ampliado</span>
-            <h2 className="font-serif text-4xl md:text-5xl font-normal mb-10 text-primary leading-tight">
+            <span className="text-accent-warm text-caption mb-6 block">Texto Ampliado</span>
+            <h2 className="text-heading-2 mb-10">
               {content.title}
             </h2>
             
             <div className="prose prose-neutral dark:prose-invert max-w-none">
               {content.content.split('\n\n').map((paragraph: string, i: number) => (
-                <p key={i} className="text-muted text-lg leading-relaxed mb-6">
+                <p key={i} className="text-body mb-6">
                   {paragraph}
                 </p>
               ))}
@@ -186,7 +191,7 @@ const BackgroundScene = () => {
 };
 
 const SectionSkeleton = () => (
-  <div className="grid md:grid-cols-2 gap-16 items-center w-full">
+  <div className="grid-responsive w-full">
     <div className="space-y-6">
       <div className="skeleton h-6 w-32" />
       <div className="skeleton h-12 w-full" />
@@ -197,7 +202,7 @@ const SectionSkeleton = () => (
         <div className="skeleton h-4 w-2/3" />
       </div>
     </div>
-    <div className="skeleton h-[550px] w-full rounded-2xl" />
+    <div className="skeleton img-responsive" />
   </div>
 );
 
@@ -239,12 +244,12 @@ const Section = ({
   const bgScale = useTransform(scrollYProgress, [0, 1], [0.8, 1.2]);
 
   return (
-    <section ref={containerRef} id={id} className="min-h-screen py-32 px-6 md:px-12 flex items-center overflow-hidden bg-bg relative">
-      <div className="max-w-6xl mx-auto w-full">
+    <section ref={containerRef} id={id} className="min-h-screen section-padding flex items-center overflow-hidden bg-bg relative">
+      <div className="container-max">
         {!isLoaded ? (
           <SectionSkeleton />
         ) : (
-          <div className={`grid md:grid-cols-2 gap-16 items-center ${reversed ? 'md:flex-row-reverse' : ''}`}>
+          <div className={`grid-responsive ${reversed ? 'md:flex-row-reverse' : ''}`}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -253,15 +258,15 @@ const Section = ({
             >
               <div className="flex items-center gap-3 mb-8">
                 <div className="card-num font-serif italic text-accent tracking-tighter text-xl">
-                  {id === 'autonomy' ? '01 — Autonomía' : id === 'resilience' ? '02 — Resiliencia' : '03 — Autoconciencia'}
+                  {id === 'autonomy' ? '[01] — Autonomía' : id === 'resilience' ? '[02] — Resiliencia' : '[03] — Autoconciencia'}
                 </div>
               </div>
               
-              <h2 className="font-sans text-4xl md:text-5xl font-semibold mb-8 tracking-tight text-primary leading-tight">
+              <h2 className="text-heading-3 mb-8">
                 {title}
               </h2>
               
-              <p className="text-lg text-muted leading-relaxed mb-10 max-w-xl">
+              <p className="text-body mb-10 max-w-xl">
                 {content}
               </p>
 
@@ -283,7 +288,7 @@ const Section = ({
                 <img 
                   src={image} 
                   alt={title} 
-                  className="w-full h-[550px] object-cover rounded-xl" 
+                  className="img-responsive" 
                   referrerPolicy="no-referrer"
                 />
               </motion.div>
@@ -305,8 +310,28 @@ const Section = ({
 
 export default function App() {
   const [activeSection, setActiveSection] = useState('hero');
-  const [isDark, setIsDark] = useState(false);
+  const [isDark, setIsDark] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.matchMedia('(prefers-color-scheme: dark)').matches;
+    }
+    return false;
+  });
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleChange = (e: MediaQueryListEvent) => setIsDark(e.matches);
+    mediaQuery.addEventListener('change', handleChange);
+    return () => mediaQuery.removeEventListener('change', handleChange);
+  }, []);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
 
   const { scrollYProgress } = useScroll();
   const progressText = useTransform(scrollYProgress, [0, 1], [0, 100]);
@@ -350,7 +375,6 @@ export default function App() {
 
   const toggleTheme = () => {
     setIsDark(!isDark);
-    document.documentElement.classList.toggle('dark');
   };
 
   return (
@@ -373,13 +397,13 @@ export default function App() {
       />
 
       {/* Hero Section */}
-      <header id="hero" className="relative min-h-screen flex flex-col items-start justify-center overflow-hidden px-6 md:px-12 pt-20">
-        <div className="max-w-5xl pt-12 relative z-10">
+      <header id="hero" className="relative min-h-screen flex flex-col items-start justify-center overflow-hidden px-6 md:px-12 lg:px-24 xl:px-32 pt-32 md:pt-40 pb-20">
+        <div className="w-full relative z-10">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="flex items-center gap-3 text-accent-warm font-bold mb-8 tracking-[0.3em] uppercase text-[10px]"
+            className="flex items-center gap-3 text-accent-warm text-caption tracking-[0.3em] mb-8"
           >
             <span className="accent-dot w-2 h-2 bg-accent-warm rounded-full animate-pulse" /> Un vistaso a mi identidad
           </motion.div>
@@ -388,7 +412,7 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="font-serif text-6xl md:text-9xl font-normal mb-10 tracking-tight leading-none text-primary"
+            className="text-heading-1 mb-10"
           >
             Análisis a mi Desarrollo <br/>
             y Madurez
@@ -398,7 +422,7 @@ export default function App() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-xl md:text-2xl text-muted mb-16 max-w-3xl leading-relaxed font-light"
+            className="text-body-lg mb-16 max-w-3xl"
           >
             Explorando la construcción de mi identidad a través de la superación personal, el aprendizaje autónomo y el valor invaluable de mis vínculos sociales.
           </motion.p>
@@ -425,8 +449,9 @@ export default function App() {
       {/* Section 01: Autonomía */}
       <Section
         id="autonomy"
-        title="// EDUCACION_AUTONOMA"
-        image="https://picsum.photos/seed/coding-context/1200/1000"
+        title="// EDUCACION_
+        AUTONOMA"
+        image={imgAutonomia}
         content="Cuando entré a Ingeniería de Sistemas, asumí que la universidad me daría las herramientas para convertirme en el profesional que quería ser. Con el tiempo, esa expectativa se fue erosionando. Llegué a quinto semestre sintiendo que lo que aprendía en clase era insuficiente, desconectado de la realidad de la industria y muchas veces desactualizado. La brecha entre lo que necesitaba saber y lo que me estaban enseñando era visible, y nadie parecía estar cerrándola..."
         onExplore={setExpandedSection}
       />
@@ -434,9 +459,9 @@ export default function App() {
       {/* Section 02: Resiliencia */}
       <Section
         id="resilience"
-        title="// INSERTIDUMBRE_Y_CRISIS"
-        reversed
-        image="https://picsum.photos/seed/family-crisis/1200/1000"
+        title="// INSERTIDUMBRE_Y
+        _CRISIS"
+        image={imgResiliencia}
         content="A finales de 2025, la empresa donde trabaja mi papá (Monómeros) entró en una crisis profunda. Problemas de carácter internacional, con implicaciones entre Estados Unidos y Venezuela, paralizaron prácticamente las operaciones. Mi papá es el sustento principal de mi familia: aporta entre el 70% y el 80% de los ingresos del hogar..."
         onExplore={setExpandedSection}
       />
@@ -446,75 +471,79 @@ export default function App() {
         id="awareness"
         title="// CONFLICOS_CON_
         MIS_VINCULOS"
-        image="https://picsum.photos/seed/mindful-reflection/1200/1000"
+        image={imgAutoconciencia}
         content="Hubo un momento, hace no tanto, en el que tuve un conflicto fuerte con alguien cercano a mí. No fue un desacuerdo menor ni una discusión pasajera: fue una de esas situaciones en las que las palabras que se dicen no se pueden devolver, y en las que uno descubre cosas de sí mismo que preferiría no haber descubierto todavía. No voy a detallar las circunstancias porque lo que importa no es la historia sino lo que dejó..."
         onExplore={setExpandedSection}
       />
 
       {/* Conclusion */}
-      <footer id="conclusion" className="py-32 px-6 md:px-12 bg-bg/50 backdrop-blur-sm border-t border-border flex flex-col md:flex-row items-end justify-between gap-16 relative overflow-hidden">
+      <footer id="conclusion" className="section-padding bg-bg/50 backdrop-blur-sm border-t border-border relative overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 bg-accent-warm/5 blur-3xl rounded-full -z-10 translate-x-1/2 -translate-y-1/2" />
         
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          className="max-w-2xl relative z-10"
-        >
-          <h3 className="text-[11px] uppercase tracking-[0.4em] font-bold text-accent-warm mb-6">Conclusión del Proyecto de Vida</h3>
-          <p className="font-serif text-3xl md:text-5xl italic text-primary leading-tight font-light">
-            "Busco ser un profesional lleno de valores, donde mi código refleje mi ética y mis principios."
-          </p>
-          <div className="mt-12 flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
-             <motion.button
-               whileHover={{ scale: 1.02 }}
-               whileTap={{ scale: 0.98 }}
-               onClick={() => setExpandedSection('conclusion')}
-               className="flex items-center gap-3 bg-primary text-secondary px-6 py-3 rounded-xl font-bold uppercase tracking-[0.2em] text-[11px] group transition-all hover:bg-neutral-800 shadow-lg hover:shadow-accent/10 w-fit"
-             >
-               Leer Conclusión <ArrowRight size={18} className="transition-transform group-hover:translate-x-2 text-accent" />
-             </motion.button>
-             <a href="https://github.com/TDev-GabrielNavarro" target="_blank" rel="noreferrer" className="group cursor-pointer flex items-center gap-2">
-                <span className="text-[10px] uppercase tracking-widest text-muted border-b border-border group-hover:text-accent group-hover:border-accent transition-colors">GitHub</span>
-                <ExternalLink size={12} className="text-muted group-hover:text-accent transition-colors" />
-             </a>
-          </div>
-        </motion.div>
-        
-        <div className="w-full md:w-auto relative z-10">
-          <div className="flex justify-between w-full md:w-[400px] text-[10px] uppercase tracking-[0.3em] text-muted mb-4 font-bold">
-            <span>Lectura de Ensayo</span>
-            <span>{readingProgress}% Completado</span>
-          </div>
-          <div className="w-full md:w-[400px] h-[3px] bg-border relative overflow-hidden rounded-full">
-            <motion.div 
-              style={{ scaleX: scrollYProgress }}
-              transition={{ duration: 0.1 }}
-              className="absolute inset-0 bg-accent origin-left shadow-[0_0_10px_var(--color-accent)]"
-            />
-          </div>
-          <div className="mt-12 text-muted text-[10px] uppercase tracking-[0.4em] font-bold text-right md:text-left">
-            © 2026 Gabriel Navarro <br/>
-            <span className="font-normal opacity-60 text-[8px]">Análisis de mi Identidad y Desarrollo</span>
+        <div className="w-full flex flex-col xl:flex-row items-start xl:items-end justify-between gap-12 xl:gap-16 relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="max-w-3xl"
+          >
+            <h3 className="text-caption text-accent-warm tracking-[0.4em] mb-6">Conclusión del Proyecto de Vida</h3>
+            <p className="text-heading-2 italic font-light">
+              "Busco ser un profesional lleno de valores, donde mi código refleje mi ética y mis principios."
+            </p>
+            <div className="mt-12 flex flex-col sm:flex-row gap-6 sm:gap-8 items-start sm:items-center">
+               <motion.button
+                 whileHover={{ scale: 1.02 }}
+                 whileTap={{ scale: 0.98 }}
+                 onClick={() => setExpandedSection('conclusion')}
+                 className="flex items-center gap-3 bg-primary text-secondary px-6 py-3 rounded-xl font-bold uppercase tracking-[0.2em] text-[11px] group transition-all hover:bg-neutral-800 shadow-lg hover:shadow-accent/10 w-fit"
+               >
+                 Leer Conclusión <ArrowRight size={18} className="transition-transform group-hover:translate-x-2 text-accent" />
+               </motion.button>
+               <a href="https://github.com/TDev-GabrielNavarro" target="_blank" rel="noreferrer" className="group cursor-pointer flex items-center gap-2">
+                  <span className="text-[10px] uppercase tracking-widest text-muted border-b border-border group-hover:text-accent group-hover:border-accent transition-colors">GitHub</span>
+                  <ExternalLink size={12} className="text-muted group-hover:text-accent transition-colors" />
+               </a>
+            </div>
+          </motion.div>
+          
+          <div className="w-full xl:w-auto mt-12 xl:mt-0">
+            <div className="flex justify-between w-full xl:w-[400px] text-[10px] uppercase tracking-[0.3em] text-muted mb-4 font-bold">
+              <span>Lectura de Ensayo</span>
+              <span>{readingProgress}% Completado</span>
+            </div>
+            <div className="w-full xl:w-[400px] h-[3px] bg-border relative overflow-hidden rounded-full">
+              <motion.div 
+                style={{ scaleX: scrollYProgress }}
+                transition={{ duration: 0.1 }}
+                className="absolute inset-0 bg-accent origin-left shadow-[0_0_10px_var(--color-accent)]"
+              />
+            </div>
+            <div className="mt-12 text-muted text-[10px] uppercase tracking-[0.4em] font-bold text-left xl:text-right">
+              © 2026 Gabriel Navarro <br/>
+              <span className="font-normal opacity-60 text-[8px]">Análisis de mi Identidad y Desarrollo</span>
+            </div>
           </div>
         </div>
       </footer>
 
       {/* Vertical Timeline Indicator */}
-      <div className="fixed right-10 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-10 z-40 items-center">
-        {['hero', 'autonomy', 'resilience', 'awareness', 'conclusion'].map((item, idx) => (
-          <div key={item} className="group relative flex items-center justify-center">
-             <a
-              href={`#${item}`}
-              className={`w-2 h-2 rounded-full transition-all duration-500 border border-accent ${
-                activeSection === item ? 'bg-accent scale-150 shadow-[0_0_8px_var(--color-accent)]' : 'bg-transparent hover:bg-accent/40'
-              }`}
-            />
-            <span className="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity text-[9px] uppercase tracking-widest font-bold text-accent whitespace-nowrap bg-bg px-2 py-1 border border-border rounded-md pointer-events-none">
-              {idx + 1}. {item}
-            </span>
-          </div>
-        ))}
-      </div>
+      {!expandedSection && (
+        <div className="fixed right-10 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-10 z-40 items-center">
+          {['hero', 'autonomy', 'resilience', 'awareness', 'conclusion'].map((item, idx) => (
+            <div key={item} className="group relative flex items-center justify-center">
+               <a
+                href={`#${item}`}
+                className={`w-2 h-2 rounded-full transition-all duration-500 border border-accent ${
+                  activeSection === item ? 'bg-accent scale-150 shadow-[0_0_8px_var(--color-accent)]' : 'bg-transparent hover:bg-accent/40'
+                }`}
+              />
+              <span className="absolute right-6 opacity-0 group-hover:opacity-100 transition-opacity text-[9px] uppercase tracking-widest font-bold text-accent whitespace-nowrap bg-bg px-2 py-1 border border-border rounded-md pointer-events-none">
+                {idx + 1}. {item}
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

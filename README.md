@@ -5,6 +5,7 @@ Un proyecto interactivo e introspectivo que explora el desarrollo personal, la a
 **Autor:** Gabriel Navarro ([@TDev-GabrielNavarro](https://github.com/TDev-GabrielNavarro))
 
 ## Tecnologías Utilizadas
+
 - React + Vite
 - TypeScript
 - Tailwind CSS
@@ -22,4 +23,4 @@ Un proyecto interactivo e introspectivo que explora el desarrollo personal, la a
    ```bash
    npm run dev
    ```
-3. Abre [http://localhost:5173](http://localhost:5173) en tu navegador para ver el proyecto.
+3. Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el proyecto.
