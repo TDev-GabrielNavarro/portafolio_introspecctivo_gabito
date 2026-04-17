@@ -21,9 +21,9 @@ import {
 } from 'lucide-react';
 
 // Importando las imágenes de la carpeta assets
-import imgAutonomia from '@/assets/img/01.jpg';
-import imgResiliencia from '@/assets/img/02.jpg';
-import imgAutoconciencia from '@/assets/img/03.jpg';
+import imgAutonomia from '@/src/assets/img/01.jpg';
+import imgResiliencia from '@/src/assets/img/02.jpg';
+import imgAutoconciencia from '@/src/assets/img/03.jpg';
 
 // --- Data ---
 
